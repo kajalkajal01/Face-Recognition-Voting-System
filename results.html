@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Live Election Results - Indian Election Portal</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🗳️ Indian Election Portal</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="login.html" class="nav-link">Vote</a>
+                <a href="results.html" class="nav-link active">Results</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="results-container">
+            <div class="results-header">
+                <h2>Live Election Results</h2>
+                <div class="update-info">
+                    <span class="live-indicator">🔴 LIVE</span>
+                    <span>Last updated: <span id="lastUpdate"></span></span>
+                </div>
+            </div>
+
+            <div class="results-summary">
+                <div class="summary-card">
+                    <h3>Total Votes Cast</h3>
+                    <div class="summary-number" id="totalVotes">0</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Registered Voters</h3>
+                    <div class="summary-number" id="totalVoters">0</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Turnout</h3>
+                    <div class="summary-number" id="turnoutPercentage">0%</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Leading Candidate</h3>
+                    <div class="summary-text" id="leadingCandidate">-</div>
+                </div>
+            </div>
+
+            <div class="constituency-selector">
+                <label for="constituencySelect">Select Constituency:</label>
+                <select id="constituencySelect">
+                    <option value="all">All Constituencies</option>
+                    <option value="delhi-north">Delhi North</option>
+                    <option value="delhi-south">Delhi South</option>
+                    <option value="mumbai-central">Mumbai Central</option>
+                    <option value="mumbai-north">Mumbai North</option>
+                    <option value="bangalore-central">Bangalore Central</option>
+                    <option value="bangalore-north">Bangalore North</option>
+                    <option value="chennai-central">Chennai Central</option>
+                    <option value="kolkata-north">Kolkata North</option>
+                </select>
+            </div>
+
+            <div class="results-grid" id="resultsGrid">
+                <!-- Results will be loaded dynamically -->
+            </div>
+
+            <div class="detailed-results">
+                <h3>Detailed Results by Constituency</h3>
+                <div class="constituency-results" id="constituencyResults">
+                    <!-- Detailed constituency results will be loaded here -->
+                </div>
+            </div>
+
+            <div class="charts-section">
+                <h3>Visual Analytics</h3>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h4>Vote Distribution</h4>
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4>Constituency Wise Results</h4>
+                        <canvas id="barChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./backend-simulation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeResults();
+            
+            // Auto-refresh results every 5 seconds
+            setInterval(updateResults, 5000);
+        });
+    </script>
+</body>
+
+</html>

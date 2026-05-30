@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Admin Panel - Indian Election Portal</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🗳️ Indian Election Portal</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="login.html" class="nav-link">Vote</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="admin.html" class="nav-link active">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>Election Administration Panel</h2>
+                <div class="admin-auth" id="adminAuth">
+                    <input type="password" id="adminPassword" placeholder="Enter admin password (admin123)">
+                    <button id="adminLogin" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+
+            <div class="admin-content" id="adminContent" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="voters">Voters</button>
+                    <button class="tab-btn" data-tab="candidates">Candidates</button>
+                    <button class="tab-btn" data-tab="settings">Settings</button>
+                </div>
+
+                <div class="tab-content active" id="dashboard">
+                    <h3>Election Dashboard</h3>
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h4>Total Registered Voters</h4>
+                            <div class="stat-number" id="adminTotalVoters">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Votes Cast Today</h4>
+                            <div class="stat-number" id="adminVotesCast">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Active Constituencies</h4>
+                            <div class="stat-number" id="adminConstituencies">8</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>System Status</h4>
+                            <div class="stat-status" id="systemStatus">🟢 Online</div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button id="resetElection" class="btn btn-danger">Reset Election Data</button>
+                        <button id="exportResults" class="btn btn-secondary">Export Results</button>
+                        <button id="generateReport" class="btn btn-accent">Generate Report</button>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="voters">
+                    <h3>Registered Voters Management</h3>
+                    <div class="search-bar">
+                        <input type="text" id="voterSearch" placeholder="Search by Aadhaar or Name">
+                        <button id="searchVoter" class="btn btn-primary">Search</button>
+                    </div>
+                    <div class="voters-table">
+                        <table id="votersTable">
+                            <thead>
+                                <tr>
+                                    <th>Aadhaar</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Constituency</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="votersTableBody">
+                                <!-- Voter data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="candidates">
+                    <h3>Candidates Management</h3>
+                    <div class="add-candidate-form">
+                        <h4>Add New Candidate</h4>
+                        <div class="form-row">
+                            <input type="text" id="candidateName" placeholder="Candidate Name">
+                            <input type="text" id="candidateParty" placeholder="Party Name">
+                            <select id="candidateConstituency">
+                                <option value="">Select Constituency</option>
+                                <option value="delhi-north">Delhi North</option>
+                                <option value="delhi-south">Delhi South</option>
+                                <option value="mumbai-central">Mumbai Central</option>
+                                <option value="mumbai-north">Mumbai North</option>
+                                <option value="bangalore-central">Bangalore Central</option>
+                                <option value="bangalore-north">Bangalore North</option>
+                                <option value="chennai-central">Chennai Central</option>
+                                <option value="kolkata-north">Kolkata North</option>
+                            </select>
+                            <button id="addCandidate" class="btn btn-primary">Add Candidate</button>
+                        </div>
+                    </div>
+                    <div class="candidates-list" id="candidatesList">
+                        <!-- Candidates will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="settings">
+                    <h3>Election Settings</h3>
+                    <div class="settings-form">
+                        <div class="setting-item">
+                            <label>Election Status:</label>
+                            <select id="electionStatus">
+                                <option value="active">Active</option>
+                                <option value="paused">Paused</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Allow New Registrations:</label>
+                            <input type="checkbox" id="allowRegistrations" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label>Face Recognition Threshold:</label>
+                            <input type="range" id="faceThreshold" min="0.3" max="0.9" step="0.1" value="0.6">
+                            <span id="thresholdValue">0.6</span>
+                        </div>
+                        <button id="saveSettings" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./backend-simulation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAdmin();
+        });
+    </script>
+</body>
+
+</html>

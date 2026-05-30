@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Voter Registration - Indian Election Portal</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🗳️ Indian Election Portal</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link active">Register</a>
+                <a href="login.html" class="nav-link">Vote</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="registration-container">
+            <div class="registration-card">
+                <h2>Voter Registration</h2>
+                <p>Register to vote using your Aadhaar number and face recognition</p>
+                
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="aadhaar">Aadhaar Number</label>
+                        <input type="text" id="aadhaar" name="aadhaar" placeholder="Enter 12-digit Aadhaar number" maxlength="12" required>
+                        <div class="validation-message" id="aadhaarValidation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="constituency">Constituency</label>
+                        <select id="constituency" name="constituency" required>
+                            <option value="">Select your constituency</option>
+                            <option value="delhi-north">Uttar Pradesh</option>
+                            <option value="delhi-south">Delhi</option>
+                            <option value="mumbai-central">Mumbai</option>
+                            <option value="mumbai-north">Uttarakhand</option>
+                            <option value="bangalore-central">Tamil Nadu</option>
+                            <option value="bangalore-north">Bangalore</option>
+                            <option value="chennai-central">Chennai</option>
+                            <option value="kolkata-north">Kolkata</option>
+                        </select>
+                    </div>
+
+                    <div class="face-capture-section">
+                        <h3>Face Registration</h3>
+                        <p>Please capture your face for secure authentication</p>
+                        
+                        <div class="camera-container">
+                            <video id="video" autoplay muted></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                        </div>
+                        
+                        <div class="camera-controls">
+                            <button type="button" id="startCamera" class="btn btn-secondary">Start Camera</button>
+                            <button type="button" id="capturePhoto" class="btn btn-primary" disabled>Capture Photo</button>
+                            <button type="button" id="retakePhoto" class="btn btn-accent" style="display: none;">Retake Photo</button>
+                        </div>
+                        
+                        <div id="capturedImage" class="captured-image" style="display: none;">
+                            <img id="previewImage" alt="Captured face">
+                            <p>Face captured successfully!</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="registerBtn" class="btn btn-primary btn-large" disabled>
+                        Complete Registration
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="loadingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p>Processing registration...</p>
+        </div>
+    </div>
+
+    <script src="./face-recognition.js"></script>
+    <script src="./backend-simulation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRegistration();
+        });
+    </script>
+</body>
+
+</html>

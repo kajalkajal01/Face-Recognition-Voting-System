@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Face Recognition Login - Indian Election Portal</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🗳️ Indian Election Portal</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="login.html" class="nav-link active">Vote</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="login-container">
+            <div class="login-card">
+                <h2>Voter Authentication</h2>
+                <p>Please authenticate using face recognition to cast your vote</p>
+                
+                <div class="auth-steps">
+                    <div class="step active" id="step1">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h3>Enter Aadhaar Number</h3>
+                        </div>
+                        <div class="step-content">
+                            <div class="form-group">
+                                <input type="text" id="loginAadhaar" placeholder="Enter your 12-digit Aadhaar number" maxlength="12">
+                                <button id="verifyAadhaar" class="btn btn-primary">Verify</button>
+                            </div>
+                            <div id="aadhaarError" class="error-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step" id="step2">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h3>Face Recognition</h3>
+                        </div>
+                        <div class="step-content">
+                            <div class="camera-container">
+                                <video id="loginVideo" autoplay muted></video>
+                                <div class="face-overlay" id="faceOverlay"></div>
+                            </div>
+                            
+                            <div class="auth-controls">
+                                <button id="startFaceAuth" class="btn btn-secondary">Start Face Recognition</button>
+                                <div id="authStatus" class="auth-status"></div>
+                            </div>
+                            
+                            <div id="authProgress" class="progress-bar" style="display: none;">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step" id="step3">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h3>Authentication Successful</h3>
+                        </div>
+                        <div class="step-content">
+                            <div class="success-message">
+                                <div class="success-icon">✅</div>
+                                <h4>Welcome, <span id="voterName"></span>!</h4>
+                                <p>You have been successfully authenticated.</p>
+                                <button id="proceedToVote" class="btn btn-primary btn-large">Proceed to Vote</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="loadingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p id="loadingText">Authenticating...</p>
+        </div>
+    </div>
+
+    <script src="./face-recognition.js"></script>
+    <script src="./backend-simulation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLogin();
+        });
+    </script>
+</body>
+
+</html>

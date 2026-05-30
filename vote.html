@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Cast Your Vote - Indian Election Portal</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🗳️ Indian Election Portal</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="login.html" class="nav-link">Vote</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="voting-container">
+            <div class="voting-header">
+                <h2>Cast Your Vote</h2>
+                <div class="voter-info">
+                    <p><strong>Voter:</strong> <span id="voterNameDisplay"></span></p>
+                    <p><strong>Constituency:</strong> <span id="voterConstituency"></span></p>
+                    <p><strong>Aadhaar:</strong> <span id="voterAadhaar"></span></p>
+                </div>
+            </div>
+
+            <div class="voting-section">
+                <h3>Select Your Candidate</h3>
+                <p class="voting-instruction">Please select one candidate from the list below:</p>
+                
+                <div class="candidates-grid" id="candidatesGrid">
+                    <!-- Candidates will be loaded dynamically -->
+                </div>
+
+                <div class="voting-actions">
+                    <button id="confirmVote" class="btn btn-primary btn-large" disabled>
+                        Confirm Vote
+                    </button>
+                    <button id="cancelVote" class="btn btn-secondary">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Vote Confirmation Modal -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Confirm Your Vote</h3>
+            <div class="confirmation-details">
+                <div class="selected-candidate" id="selectedCandidateInfo">
+                    <!-- Selected candidate info will be displayed here -->
+                </div>
+                <p><strong>Warning:</strong> Once submitted, your vote cannot be changed.</p>
+            </div>
+            <div class="modal-actions">
+                <button id="finalSubmit" class="btn btn-primary">Submit Vote</button>
+                <button id="cancelConfirm" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-icon">🗳️</div>
+            <h3>Vote Submitted Successfully!</h3>
+            <p>Thank you for participating in the democratic process.</p>
+            <p>Your vote has been recorded securely.</p>
+            <div class="modal-actions">
+                <button id="viewResults" class="btn btn-primary">View Results</button>
+                <button id="goHome" class="btn btn-secondary">Go Home</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p>Submitting your vote...</p>
+        </div>
+    </div>
+
+    <script src="./backend-simulation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVoting();
+        });
+    </script>
+</body>
+
+</html>
